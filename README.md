@@ -1,6 +1,5 @@
 # Custom PHP build scripts for PocketMine-MP
 [![Build Status](https://dev.azure.com/pocketmine/PHP-Builds/_apis/build/status/pmmp.php-build-scripts)](https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&_a=summary&view=branches)
-## Looking for prebuilt binaries? Head over to our [Jenkins build server](https://jenkins.pmmp.io/job/PHP-7.4-Aggregate)
 
 ## compile.sh
 
@@ -40,27 +39,3 @@ Bash script used to compile PHP on MacOS and Linux platforms. Make sure you have
 ### Common pitfalls
 - If used, the `-t` option (target) MUST be specified BEFORE the `-f` option (optimizations)
 - Avoid using the script in directory trees containing spaces. Some libraries don't like trying to be built in directory trees containing spaces, e.g. `/home/user/my folder/pocketmine-mp/` might experience problems.
-
-## installer.sh
-
-Script to install PocketMine-MP and PHP binaries on Unix platforms.
-
-| Flag   | Description                         |
-| ------ | ----------------------------------- |
-| -u     | Update PocketMine-MP                |
-| -d     | Install directory                   |
-| -v     | Channel (stable or development)     |
-
-
-## windows-compile-vs.bat
-
-Batch script utilizing Visual Studio on Windows to compile PHP binaries from sources.
-Ensure you have Visual Studio 2017, `git`, `7z` and `wget` installed in your PATH.
-
-This script doesn't accept parameters, but the following environment variables are influential:
-
-| Variable | Description |
-| -------- | ----------- |
-| `PHP_DEBUG_BUILD` | Disables optimisations and builds PHP with detailed debugging information (useful for debugging segfaults)
-| `SOURCES_PATH` | Where to put the downloaded sources for compilation |
-| `VS_EDITION` | Edition of Visual Studio installed, set to `Community` by default |

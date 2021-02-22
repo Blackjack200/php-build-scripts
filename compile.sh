@@ -18,6 +18,7 @@ LIBDEFLATE_VERSION="448e3f3b042219bccb0080e393ba3eb68c2091d5" #1.7
 EXT_PTHREADS_VERSION="130d8de4909f9ca7143652db6fee4d29dbfa17f8"
 EXT_YAML_VERSION="2.2.1"
 EXT_LEVELDB_VERSION="2e3f740b55af1eb6dfc648dd451bcb7d6151c26c"
+EXT_POCKETMINE_CHUNKUTILS_VERSION="0.1.0"
 EXT_CHUNKUTILS2_VERSION="7aec31a9dfc83ddead8870dc0a29159596939680"
 EXT_XDEBUG_VERSION="3.0.2"
 EXT_IGBINARY_VERSION="3.2.1"
@@ -820,6 +821,8 @@ echo " done!"
 
 get_github_extension "leveldb" "$EXT_LEVELDB_VERSION" "pmmp" "php-leveldb"
 
+get_github_extension "pocketmine-chunkutils" "$EXT_POCKETMINE_CHUNKUTILS_VERSION" "dktapps" "PocketMine-C-ChunkUtils"
+
 get_github_extension "chunkutils2" "$EXT_CHUNKUTILS2_VERSION" "pmmp" "ext-chunkutils2"
 
 get_github_extension "libdeflate" "$EXT_LIBDEFLATE_VERSION" "pmmp" "ext-libdeflate"
@@ -917,6 +920,7 @@ $HAS_GD \
 --without-readline \
 $HAS_PROFILER \
 $HAS_DEBUG \
+--enable-pocketmine-chunkutils \
 --enable-chunkutils2 \
 --enable-morton \
 --enable-mbstring \
@@ -956,6 +960,7 @@ $HAVE_MYSQLI \
 --enable-ds \
 --with-crypto \
 --enable-recursionguard \
+--with-ffi
 $HAVE_VALGRIND \
 $CONFIGURE_FLAGS >> "$DIR/install.log" 2>&1
 echo -n " compiling..."

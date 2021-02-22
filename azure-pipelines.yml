@@ -32,35 +32,6 @@ jobs:
     inputs:
       ArtifactName: Linux
     condition: succeededOrFailed()
-- job: Windows
-  pool:
-    vmImage: 'vs2017-win2016'
-  steps:
-  - script: |
-      choco install wget --no-progress
-    displayName: Install Dependencies
-  - script: |
-      windows-compile-vs.bat
-    displayName: Build PHP
-    env:
-      VS_EDITION: Enterprise
-      SOURCES_PATH: $(Build.SourcesDirectory)\pocketmine-php-sdk
-  - script: |
-      dir
-      cd %BUILD_SOURCESDIRECTORY%
-      dir
-      cp php-*.zip %BUILD_ARTIFACTSTAGINGDIRECTORY%
-      cp compile.log %BUILD_ARTIFACTSTAGINGDIRECTORY%
-    displayName: Copy Artifacts
-    condition: succeededOrFailed()
-  - script: type compile.log
-    displayName: Show Build Log
-    condition: succeededOrFailed()
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: Windows'
-    inputs:
-      ArtifactName: Windows
-    condition: succeededOrFailed()
 - job: MacOS
   pool:
     vmImage: 'macOS-10.14'

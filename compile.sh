@@ -960,7 +960,6 @@ $HAVE_MYSQLI \
 --enable-ds \
 --with-crypto \
 --enable-recursionguard \
---with-ffi
 $HAVE_VALGRIND \
 $CONFIGURE_FLAGS >> "$DIR/install.log" 2>&1
 echo -n " compiling..."

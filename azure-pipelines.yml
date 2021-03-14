@@ -5,7 +5,7 @@ jobs:
   steps:
   - bash: |
       sudo apt-get update
-      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c libc6-dev
+      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c libc6-dev libffi-dev
     displayName: Install Dependencies
   - bash: |
       # Used "set -ex" instead of hashbang since script isn't executed with hashbang
@@ -41,6 +41,12 @@ jobs:
     displayName: Install Dependencies
   - bash: |
       export PATH="/usr/local/opt/bison/bin:$PATH"
+      export LDFLAGS="-L/usr/local/opt/libiconv/lib"
+      export CPPFLAGS="-I/usr/local/opt/libiconv/include"
+      export PATH="/usr/local/opt/libiconv/bin:$PATH"
+      export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+      export LDFLAGS="-L/usr/local/opt/libffi/lib"
+      export CPPFLAGS="-I/usr/local/opt/libffi/include"
       set -ex
       trap "exit 1" ERR
 

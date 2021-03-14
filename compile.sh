@@ -744,7 +744,7 @@ function build_libffi {
 	git reset --hard $LIBFFI_VERSION >> "$DIR/install.log" 2>&1
 	echo -n " compiling..."
 	./autogen.sh >> "$DIR/install.log" 2>&1
-	./configure "$DIR/install.log" 2>&1
+	./configure >> "$DIR/install.log" 2>&1
 	make -j $THREADS install >> "$DIR/install.log" 2>&1
 	cd ..
 	echo " done!"

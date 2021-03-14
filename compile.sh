@@ -17,7 +17,8 @@ LIBDEFLATE_VERSION="448e3f3b042219bccb0080e393ba3eb68c2091d5" #1.7
 
 EXT_PTHREADS_VERSION="681b01945bac85f7de81e4db290ae0b685e54b6e"
 EXT_YAML_VERSION="2.2.1"
-EXT_LEVELDB_VERSION="98f2fc73d41e25ce74c59dd49c43380be1cbcf09"
+EXT_LEVELDB_VERSION="2e3f740b55af1eb6dfc648dd451bcb7d6151c26c"
+EXT_POCKETMINE_CHUNKUTILS_VERSION="0.1.0"
 EXT_CHUNKUTILS2_VERSION="7aec31a9dfc83ddead8870dc0a29159596939680"
 EXT_XDEBUG_VERSION="3.0.2"
 EXT_IGBINARY_VERSION="3.2.1"
@@ -822,6 +823,8 @@ echo " done!"
 
 get_github_extension "leveldb" "$EXT_LEVELDB_VERSION" "pmmp" "php-leveldb"
 
+get_github_extension "pocketmine-chunkutils" "$EXT_POCKETMINE_CHUNKUTILS_VERSION" "dktapps" "PocketMine-C-ChunkUtils"
+
 get_github_extension "chunkutils2" "$EXT_CHUNKUTILS2_VERSION" "pmmp" "ext-chunkutils2"
 
 get_github_extension "libdeflate" "$EXT_LIBDEFLATE_VERSION" "pmmp" "ext-libdeflate"
@@ -903,6 +906,11 @@ if [ "$FSANITIZE_OPTIONS" != "" ]; then
 	LDFLAGS="-fsanitize=$FSANITIZE_OPTIONS $LDFLAGS"
 fi
 
+ICONV_PATH=""
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  ICONV_PATH="--with-iconv=/usr/local/opt/libiconv/"
+fi
+
 RANLIB=$RANLIB CFLAGS="$CFLAGS $FLAGS_LTO" CXXFLAGS="$CXXFLAGS $FLAGS_LTO" LDFLAGS="$LDFLAGS $FLAGS_LTO" ./configure $PHP_OPTIMIZATION --prefix="$DIR/bin/php7" \
 --exec-prefix="$DIR/bin/php7" \
 --with-curl \
@@ -919,6 +927,7 @@ $HAS_GD \
 --without-readline \
 $HAS_PROFILER \
 $HAS_DEBUG \
+--enable-pocketmine-chunkutils \
 --enable-chunkutils2 \
 --enable-morton \
 --enable-mbstring \
@@ -936,7 +945,6 @@ $HAS_DEBUG \
 --disable-phpdbg \
 --disable-session \
 --without-pear \
---without-iconv \
 --with-pdo-sqlite \
 --with-pdo-mysql \
 --with-pic \
@@ -958,7 +966,9 @@ $HAVE_MYSQLI \
 --enable-igbinary \
 --enable-ds \
 --with-crypto \
+--with-ffi \
 --enable-recursionguard \
+$ICONV_PATH \
 $HAVE_VALGRIND \
 $CONFIGURE_FLAGS >> "$DIR/install.log" 2>&1
 echo -n " compiling..."
@@ -985,9 +995,6 @@ function relativize_macos_library_paths {
 		if [[ "$CURRENT_DYLIB_NAME" == "$DIR/bin/php7/"* ]]; then
 			NEW_DYLIB_NAME=$(echo "$CURRENT_DYLIB_NAME" | sed "s{$DIR/bin/php7{@loader_path/..{" | xargs)
 			install_name_tool -change "$CURRENT_DYLIB_NAME" "$NEW_DYLIB_NAME" "$1" >> "$DIR/install.log" 2>&1
-		elif [[ "$CURRENT_DYLIB_NAME" != "/usr/lib/"* ]] && [[ "$CURRENT_DYLIB_NAME" != "/System/"* ]] && [[ "$CURRENT_DYLIB_NAME" != "@loader_path"* ]] && [[ "$CURRENT_DYLIB_NAME" != "@rpath"* ]]; then
-			echo "[ERROR] Detected linkage to non-local non-system library $CURRENT_DYLIB_NAME by $1"
-			exit 1
 		fi
 	done
 }

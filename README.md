@@ -1,6 +1,5 @@
 # Custom PHP build scripts for PocketMine-MP
 [![Build Status](https://dev.azure.com/pocketmine/PHP-Builds/_apis/build/status/pmmp.php-build-scripts)](https://dev.azure.com/pocketmine/PHP-Builds/_build?definitionId=3&_a=summary&view=branches)
-## Looking for prebuilt binaries? Head over to our [Jenkins build server](https://jenkins.pmmp.io/job/PHP-7.4-Aggregate)
 
 ## compile.sh
 
@@ -40,6 +39,7 @@ Bash script used to compile PHP on MacOS and Linux platforms. Make sure you have
 ### Common pitfalls
 - If used, the `-t` option (target) MUST be specified BEFORE the `-f` option (optimizations)
 - Avoid using the script in directory trees containing spaces. Some libraries don't like trying to be built in directory trees containing spaces, e.g. `/home/user/my folder/pocketmine-mp/` might experience problems.
+<<<<<<< HEAD
 
 ## installer.sh
 

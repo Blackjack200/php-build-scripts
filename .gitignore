@@ -5,3 +5,5 @@ temp_data/
 compile.log
 /*.zip
 /*.exe
+.idea
+.DS_Store

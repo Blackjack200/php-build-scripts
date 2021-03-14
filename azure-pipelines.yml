@@ -5,7 +5,7 @@ jobs:
   steps:
   - bash: |
       sudo apt-get update
-      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c
+      sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c libc6-dev
     displayName: Install Dependencies
   - bash: |
       # Used "set -ex" instead of hashbang since script isn't executed with hashbang
@@ -37,7 +37,7 @@ jobs:
     vmImage: 'macOS-10.14'
   steps:
   - bash: |
-      brew install libtool autoconf automake pkg-config bison re2c
+      brew install libtool autoconf automake pkg-config bison re2c libiconv
     displayName: Install Dependencies
   - bash: |
       export PATH="/usr/local/opt/bison/bin:$PATH"

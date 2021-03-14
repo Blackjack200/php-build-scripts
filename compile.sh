@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -z "$PHP_VERSION" ] && PHP_VERSION="7.4.15"
+[ -z "$PHP_VERSION" ] && PHP_VERSION="7.4.16"
 
 ZLIB_VERSION="1.2.11"
 GMP_VERSION="6.2.1"
@@ -15,7 +15,7 @@ SQLITE3_YEAR="2021"
 SQLITE3_VERSION="3340100" #3.34.1
 LIBDEFLATE_VERSION="448e3f3b042219bccb0080e393ba3eb68c2091d5" #1.7
 
-EXT_PTHREADS_VERSION="130d8de4909f9ca7143652db6fee4d29dbfa17f8"
+EXT_PTHREADS_VERSION="681b01945bac85f7de81e4db290ae0b685e54b6e"
 EXT_YAML_VERSION="2.2.1"
 EXT_LEVELDB_VERSION="2e3f740b55af1eb6dfc648dd451bcb7d6151c26c"
 EXT_POCKETMINE_CHUNKUTILS_VERSION="0.1.0"
@@ -938,7 +938,6 @@ $HAS_DEBUG \
 --disable-phpdbg \
 --disable-session \
 --without-pear \
---without-iconv \
 --with-pdo-sqlite \
 --with-pdo-mysql \
 --with-pic \

@@ -37,7 +37,7 @@ jobs:
     vmImage: 'macOS-10.14'
   steps:
   - bash: |
-      brew install libtool autoconf automake pkg-config bison re2c libiconv
+      brew install libtool autoconf automake pkg-config bison re2c libiconv libffi
     displayName: Install Dependencies
   - bash: |
       export PATH="/usr/local/opt/bison/bin:$PATH"

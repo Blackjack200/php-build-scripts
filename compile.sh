@@ -14,6 +14,7 @@ LIBZIP_VERSION="1.7.3"
 SQLITE3_YEAR="2021"
 SQLITE3_VERSION="3340100" #3.34.1
 LIBDEFLATE_VERSION="448e3f3b042219bccb0080e393ba3eb68c2091d5" #1.7
+LIBFFI_VERSION="5c63b463b87d3c06102a4a7f05f395929d9ea79b"
 
 EXT_PTHREADS_VERSION="681b01945bac85f7de81e4db290ae0b685e54b6e"
 EXT_YAML_VERSION="2.2.1"
@@ -736,6 +737,20 @@ function build_libdeflate {
 	echo " done!"
 }
 
+function build_libffi {
+	echo -n "[libffi] downloading $LIBFFI_VERSION..."
+	git clone https://github.com/libffi/libffi.git libffi >> "$DIR/install.log" 2>&1
+	cd libffi
+	git reset --hard $LIBFFI_VERSION >> "$DIR/install.log" 2>&1
+	echo -n " compiling..."
+	./autogen.sh >> "$DIR/install.log" 2>&1
+	./configure "$DIR/install.log" 2>&1
+	make -j $THREADS install >> "$DIR/install.log" 2>&1
+	cd ..
+	echo " done!"
+}
+
+build_libffi
 build_zlib
 build_gmp
 build_openssl

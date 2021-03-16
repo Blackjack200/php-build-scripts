@@ -34,7 +34,7 @@ jobs:
     condition: succeededOrFailed()
 - job: MacOS
   pool:
-    vmImage: 'macOS-10.14'
+    vmImage: 'macOS-10.15'
   steps:
   - bash: |
       brew install libtool autoconf automake pkg-config bison re2c libiconv libffi
@@ -45,8 +45,8 @@ jobs:
       export CPPFLAGS="-I/usr/local/opt/libiconv/include"
       export PATH="/usr/local/opt/libiconv/bin:$PATH"
       export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
-      export LDFLAGS="-L/usr/local/opt/libffi/lib"
-      export CPPFLAGS="-I/usr/local/opt/libffi/include"
+      export LDFLAGS="-L/usr/local/opt/libffi/lib $LDFLAGS"
+      export CPPFLAGS="-I/usr/local/opt/libffi/include $CPPFLAGS"
       set -ex
       trap "exit 1" ERR
 

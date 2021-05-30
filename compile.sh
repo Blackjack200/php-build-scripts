@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -z "$PHP_VERSION" ] && PHP_VERSION="8.0.3"
+[ -z "$PHP_VERSION" ] && PHP_VERSION="7.4.19"
 
 ZLIB_VERSION="1.2.11"
 GMP_VERSION="6.2.1"
@@ -822,8 +822,6 @@ get_github_extension "yaml" "$EXT_YAML_VERSION" "php" "pecl-file_formats-yaml"
 #get_pecl_extension "yaml" "$EXT_YAML_VERSION"
 
 get_github_extension "igbinary" "$EXT_IGBINARY_VERSION" "igbinary" "igbinary"
-#TODO: remove this when igbinary 3.2.2 is released
-sed -i='.bak' 's/^#if PHP_MAJOR_VERSION == 7$/#if PHP_MAJOR_VERSION == 7 || PHP_MAJOR_VERSION == 8/g' "$BUILD_DIR/php/ext/igbinary/php_igbinary.h"
 
 get_github_extension "ds" "$EXT_DS_VERSION" "php-ds" "ext-ds"
 
@@ -1062,8 +1060,6 @@ if [ "$HAVE_OPCACHE" == "yes" ]; then
 	echo "opcache.revalidate_freq=0" >> "$DIR/bin/php7/bin/php.ini"
 	echo "opcache.file_update_protection=0" >> "$DIR/bin/php7/bin/php.ini"
 	echo "opcache.optimization_level=0x7FFEBFFF ;https://github.com/php/php-src/blob/53c1b485741f31a17b24f4db2b39afeb9f4c8aba/ext/opcache/Optimizer/zend_optimizer.h" >> "$DIR/bin/php7/bin/php.ini"
-	echo "opcache.jit=1205 ;https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit" >> "$DIR/bin/php7/bin/php.ini"
-	echo "opcache.jit_buffer_size=128M" >> "$DIR/bin/php7/bin/php.ini"
 fi
 
 echo " done!"

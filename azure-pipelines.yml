@@ -8,6 +8,8 @@ jobs:
       sudo apt-get install make autoconf automake libtool libtool-bin m4 wget libc-bin gzip bzip2 bison g++ git re2c libc6-dev libffi-dev
     displayName: Install Dependencies
   - bash: |
+      export LDFLAGS="-O3 $LDFLAGS"
+      export CPPFLAGS="-O3 $CPPFLAGS"
       # Used "set -ex" instead of hashbang since script isn't executed with hashbang
       set -ex
 
@@ -47,10 +49,12 @@ jobs:
       export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
       export LDFLAGS="-L/usr/local/opt/libffi/lib $LDFLAGS"
       export CPPFLAGS="-I/usr/local/opt/libffi/include $CPPFLAGS"
+      export LDFLAGS="-O3 $LDFLAGS"
+      export CPPFLAGS="-O3 $CPPFLAGS"
       set -ex
       trap "exit 1" ERR
 
-      ./compile.sh -t mac64 -j256 -f -g
+      ./compile.sh -t mac64 -j 256 -f -g
       tar -czf ./PHP_MacOS-x86_64.tar.gz bin
     displayName: Build PHP
   - bash: |

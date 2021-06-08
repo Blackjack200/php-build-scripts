@@ -968,7 +968,7 @@ $HAS_DEBUG \
 --enable-shared=no \
 --enable-static=yes \
 --enable-shmop \
---enable-zts \
+--enable-maintainer-zts \
 --disable-short-tags \
 $HAVE_PCNTL \
 $HAVE_MYSQLI \
@@ -976,7 +976,6 @@ $HAVE_MYSQLI \
 --enable-cli \
 --enable-ftp \
 --enable-opcache=$HAVE_OPCACHE \
---enable-opcache-jit=$HAVE_OPCACHE \
 --enable-igbinary \
 --enable-ds \
 --with-crypto \

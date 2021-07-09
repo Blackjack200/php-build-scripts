@@ -369,7 +369,7 @@ cd "$BUILD_DIR"
 set -e
 
 #PHP 7
-echo -n "[PHP] downloading $PHP_VERSION..."
+echo -n "[PHP] Downloading $PHP_VERSION..."
 
 download_file "https://github.com/php/php-src/archive/php-$PHP_VERSION.tar.gz" | tar -zx >> "$DIR/install.log" 2>&1
 mv php-src-php-$PHP_VERSION php

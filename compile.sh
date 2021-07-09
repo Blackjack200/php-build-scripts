@@ -14,7 +14,6 @@ LIBZIP_VERSION="1.8.0"
 SQLITE3_YEAR="2021"
 SQLITE3_VERSION="3360000" #3.36.0
 LIBDEFLATE_VERSION="448e3f3b042219bccb0080e393ba3eb68c2091d5" #1.7
-LIBFFI_VERSION="5c63b463b87d3c06102a4a7f05f395929d9ea79b"
 
 EXT_PTHREADS_VERSION="2784d4d17dc53be9e2732a5c11dae199b4a57c93"
 EXT_YAML_VERSION="2.2.1"
@@ -736,21 +735,6 @@ function build_libdeflate {
 	echo " done!"
 }
 
-function build_libffi {
-	echo -n "[libffi] downloading $LIBFFI_VERSION..."
-	git clone https://github.com/libffi/libffi.git libffi >> "$DIR/install.log" 2>&1
-	cd libffi
-	git reset --hard $LIBFFI_VERSION >> "$DIR/install.log" 2>&1
-	echo -n " compiling..."
-	./autogen.sh >> "$DIR/install.log" 2>&1
-	./configure --prefix="$DIR/bin/php7" >> "$DIR/install.log" 2>&1
-	make -j $THREADS install >> "$DIR/install.log" 2>&1
-	cd ..
-	echo " done!"
-}
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  build_libffi
-fi
 build_zlib
 build_gmp
 build_openssl
@@ -966,7 +950,6 @@ $HAVE_MYSQLI \
 --enable-opcache=$HAVE_OPCACHE \
 --enable-igbinary \
 --with-crypto \
---with-ffi \
 --enable-recursionguard \
 $ICONV_PATH \
 $HAVE_VALGRIND \
